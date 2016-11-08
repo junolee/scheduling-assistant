@@ -1,0 +1,45 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+    background:#eee;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.row {
+    height: 100%;
+}
+
+.main-view{
+    padding-right:380px;
+    z-index: 0;
+    height: 100%;
+    background-image:url('../images/mt-fuji.jpg');
+    background-repeat:no-repeat;
+    background-position:center;
+}
+
+.main-view-content {
+      min-width: 400px;
+}
+
+.chat-view{
+    width:379px;
+    position:fixed;
+    height:100%;
+    z-index: 1;
+    background:rgba(245, 233, 230, 0.6);
+}
+
+.rtl {
+     direction: rtl;
+}
+
+.rtl * {
+     direction: ltr;
+}

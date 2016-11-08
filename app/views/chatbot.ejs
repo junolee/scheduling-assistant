@@ -1,0 +1,60 @@
+<% include ./partials/header %>
+<div class="row rtl">
+    <div class="col-xs-12 main-view">
+        <div class="main-view-content">
+            <p>This is the main view. This is the main view. </p>
+        </div>
+    </div>
+
+    <div class="chat-view">
+        <!-- CHATBOX HEADER -->
+        <div class="chatbox-header">
+            <h1 class="chatbox-title">Schedule Assistant</h1>
+        </div>
+        <!-- /CHATBOX HEADER-->
+
+        <!-- CHATBOX BODY -->
+        <div class="chatbox-body">
+            <!-- Bot Message -->
+            <div class="message">
+                <div class="clearfix">
+                    <span class="timestamp pull-right">23 Jan 2:00 pm</span>
+                </div>
+                <img class="chat-img" src="http://bootdey.com/img/Content/user_1.jpg" alt="Message User Image">
+                <div class="msg-text">
+                    Lorem ipsum dolor sit amet, nam eu ludus voluptua tacimates. Te nostrum appareat salutandi sed, ei quidam laboramus eos, nibh libris cum an. Perfecto petentium vis cu, amet case corrumpit ad usu. Vim delenit temporibus ea. Mei no novum persius, et mei wisi virtute nostrum. Ferri nullam mentitum sed ad.
+                </div>
+            </div>
+            <!-- /Bot Message -->
+
+
+            <!-- User Message -->
+            <div class="message right">
+                <div class="info clearfix">
+                    <span class="timestamp pull-left">23 Jan 2:05 pm</span>
+                </div>
+                <img class="chat-img" src="http://bootdey.com/img/Content/user_2.jpg" alt="Message User Image">
+                <div class="msg-text">
+                    Can you add my meeting to my calendar?
+                </div>
+            </div>
+            <!-- /User Message -->
+        </div>
+        <!-- /CHATBOX BODY -->
+
+        <!-- CHATBOX FOOTER -->
+        <div class="chatbox-footer">
+            <div class="input-group">
+              <input type="text" name="message" placeholder="type message..." class="form-control">
+                  <span class="input-group-btn">
+                    <button type="submit" class="send-btn btn btn-primary btn-flat">Send</button>
+                  </span>
+            </div>
+
+        </div>
+        <!-- /.CHATBOX FOOTER-->
+    </div>
+</div>
+
+<script src="scripts/chat.js"></script>
+<% include ./partials/footer %>
