@@ -1,6 +1,12 @@
 var bodyParser = require("body-parser"),
+sass           = require('node-sass'),
 express        = require("express"),
 app            = express();
+
+sass.render({
+  file: scss_filename,
+  [, options..]
+}, function(err, result) { /*...*/ });
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
