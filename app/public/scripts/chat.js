@@ -5,7 +5,7 @@ var $messages = $('.messages-content'),
 $(window).on('load', function() {
   $messages.mCustomScrollbar();
   setTimeout(function() {
-    fakeMessage();
+    welcomeMessage();
   }, 100);
 });
 
@@ -34,7 +34,7 @@ function insertMessage() {
   $('.message-input').val(null);
   updateScrollbar();
   setTimeout(function() {
-    fakeMessage();
+    reply();
   }, 1000 + (Math.random() * 20) * 100);
 }
 
@@ -49,23 +49,7 @@ $(window).on('keydown', function(e) {
   }
 })
 
-var Fake = [
-  'Hi there',
-  'Nice to meet you',
-  'How are you?',
-  'Not too bad, thanks',
-  'What do you do?',
-  'That\'s awesome',
-  'I think you\'re a nice person',
-  'Why do you think that?',
-  'Can you explain?',
-  'Anyway I\'ve gotta go now',
-  'It was a pleasure chat with you',
-  'Bye',
-  ':)'
-]
-
-function fakeMessage() {
+function welcomeMessage() {
   if ($('.message-input').val() != '') {
     return false;
   }
@@ -74,9 +58,25 @@ function fakeMessage() {
 
   setTimeout(function() {
     $('.message.loading').remove();
-    $('<div class="message new">' + Fake[i] + '</div>').appendTo($('.mCSB_container')).addClass('new');
+    $('<div class="message new">' + 'Hello there' + '</div>').appendTo($('.mCSB_container')).addClass('new');
     setDate();
     updateScrollbar();
     i++;
-  }, 1000 + (Math.random() * 20) * 100);
+}, 1000);
+}
+
+function reply() {
+  if ($('.message-input').val() != '') {
+    return false;
+  }
+  $('<div class="message loading new"><span></span></div>').appendTo($('.mCSB_container'));
+  updateScrollbar();
+
+  setTimeout(function() {
+    $('.message.loading').remove();
+    $('<div class="message new">' + 'something' + '</div>').appendTo($('.mCSB_container')).addClass('new');
+    setDate();
+    updateScrollbar();
+    i++;
+}, 500 + (Math.random() * 20) * 100);
 }
