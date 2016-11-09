@@ -29,13 +29,17 @@ function insertMessage() {
   if ($.trim(msg) == '') {
     return false;
   }
-  $('<div class="message user-message">' + msg + '</div>').appendTo($('.mCSB_container')).addClass('new');
-  setDate();
-  $('.message-input').val(null);
-  updateScrollbar();
-  setTimeout(function() {
-    reply();
-  }, 1000 + (Math.random() * 20) * 100);
+  $.get('/getMessage', {message:msg})
+    .then(function (result){
+        $('<div class="message user-message">' + msg + '</div>').appendTo($('.mCSB_container')).addClass('new');
+        setDate();
+        $('.message-input').val(null);
+        updateScrollbar();
+        reply(result);
+    }).catch(function(err){
+        alert("Sorry, this service is not available right now.");
+        console.log(err);
+    })
 }
 
 $('.message-submit').click(function() {
@@ -65,7 +69,7 @@ function welcomeMessage() {
 }, 1000);
 }
 
-function reply() {
+function reply(msg = 'Sorry, my service is currently unavailable.') {
   if ($('.message-input').val() != '') {
     return false;
   }
@@ -74,9 +78,19 @@ function reply() {
 
   setTimeout(function() {
     $('.message.loading').remove();
-    $('<div class="message new">' + 'something' + '</div>').appendTo($('.mCSB_container')).addClass('new');
+
+    $('<div class="message new">' + msg + '</div>').appendTo($('.mCSB_container')).addClass('new');
+
     setDate();
     updateScrollbar();
     i++;
-}, 500 + (Math.random() * 20) * 100);
+  }, 500 + (Math.random() * 20) * 100);
+}
+
+function setDate(){
+  d = new Date()
+  if (m != d.getMinutes()) {
+    m = d.getMinutes();
+    $('<div class="timestamp">' + d.getHours() + ':' + m + '</div>').appendTo($('.message:last'));
+  }
 }
