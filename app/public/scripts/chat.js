@@ -29,7 +29,7 @@ function insertMessage() {
   if ($.trim(msg) == '') {
     return false;
   }
-  $('<div class="message message-personal">' + msg + '</div>').appendTo($('.mCSB_container')).addClass('new');
+  $('<div class="message user-message">' + msg + '</div>').appendTo($('.mCSB_container')).addClass('new');
   setDate();
   $('.message-input').val(null);
   updateScrollbar();
@@ -50,19 +50,17 @@ $(window).on('keydown', function(e) {
 })
 
 var Fake = [
-  'Hi there, I\'m Fabio and you?',
+  'Hi there',
   'Nice to meet you',
   'How are you?',
   'Not too bad, thanks',
   'What do you do?',
   'That\'s awesome',
-  'Codepen is a nice place to stay',
   'I think you\'re a nice person',
   'Why do you think that?',
   'Can you explain?',
   'Anyway I\'ve gotta go now',
   'It was a pleasure chat with you',
-  'Time to make a new codepen',
   'Bye',
   ':)'
 ]
@@ -71,12 +69,12 @@ function fakeMessage() {
   if ($('.message-input').val() != '') {
     return false;
   }
-  $('<div class="message loading new"><figure class="avatar"><img src="http://bootdey.com/img/Content/user_1.jpg" /></figure><span></span></div>').appendTo($('.mCSB_container'));
+  $('<div class="message loading new"><span></span></div>').appendTo($('.mCSB_container'));
   updateScrollbar();
 
   setTimeout(function() {
     $('.message.loading').remove();
-    $('<div class="message new"><figure class="avatar"><img src="http://bootdey.com/img/Content/user_1.jpg" /></figure>' + Fake[i] + '</div>').appendTo($('.mCSB_container')).addClass('new');
+    $('<div class="message new">' + Fake[i] + '</div>').appendTo($('.mCSB_container')).addClass('new');
     setDate();
     updateScrollbar();
     i++;

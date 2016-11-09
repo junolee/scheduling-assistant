@@ -33,7 +33,7 @@ body {
     position:fixed;
     height:100%;
     z-index: 1;
-    background:rgba(255, 255, 255, 0.3);
+    background:rgba(255, 255, 255, 0.4);
 }
 
 .rtl {
