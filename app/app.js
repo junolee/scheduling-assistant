@@ -1,5 +1,6 @@
 var bodyParser = require("body-parser"),
 express        = require("express"),
+axios          = require('axios'),
 app            = express();
 
 app.set("view engine", "ejs");
@@ -17,10 +18,14 @@ app.get("/chatbot", function(req, res){
 });
 
 app.get("/getMessage", function(req, res){
-    console.log(req.query);
-    // send message to python server
-    // when u get a response, send back to client
-    res.send(reply);
+    console.log(req.query.message);
+    axios.get('http://localhost:8080?message=' + req.query.message)
+      .then(function (response) {
+        res.send(response.data);
+      })
+      .catch(function (error) {
+        console.log("get request to python server didn't work: " + error);
+      });
 })
 
 app.listen(3000, function(){

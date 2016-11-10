@@ -37,8 +37,7 @@ function insertMessage() {
         updateScrollbar();
         reply(result);
     }).catch(function(err){
-        alert("Sorry, this service is not available right now.");
-        console.log(err);
+        console.log('get request to server failed: ' + err);
     })
 }
 

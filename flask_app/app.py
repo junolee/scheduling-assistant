@@ -1,38 +1,33 @@
-from flask import Flask, request, jsonify, url_for, redirect
-import numpy as np
-import pandas as pd
-import pickle
-import requests
-from spacy.en import English
+# coding: utf-8
+from BaseHTTPServer import BaseHTTPRequestHandler,HTTPServer
+from urlparse import urlparse
 
-app = Flask(__name__)
-PORT = 5000
+PORT_NUMBER = 8080
 
-parser = English()
-def tokenize(text): # get the tokens using spaCy
-    tokens = parser(text)
-    new = []
-    for tok in tokens:
-        new.append(tok.lemma_.lower().strip())
-    tokens = new
-    return tokens
+#This class will handles any incoming request from the browser
+class myHandler(BaseHTTPRequestHandler):
 
-@app.route('/')
-def index():
-    return redirect(url_for('json_data'))
-
-@app.route('/json-data/')
-def json_data():
-    # get number of items from the javascript request
-    message = request.args.get('message', 'Did not receive message.')
-    prediction = model.predict([message])[0]
-    # return json
-    print message
-    return jsonify({'reply': prediction})
+	#Handler for the GET requests
+    def do_GET(self):
+        self.send_response(200)
+        self.send_header('Content-type','text/plain')
+        self.end_headers()
+        query = urlparse(self.path).query
+        query_components = dict(qc.split("=") for qc in query.split("&"))
+        msg = query_components["message"]
+        self.wfile.write(msg)
+        return
 
 if __name__ == '__main__':
+    try:
+    	#Create a web server and define the handler to manage the
+    	#incoming request
+    	server = HTTPServer(('', PORT_NUMBER), myHandler)
+    	print 'Started httpserver on port ' , PORT_NUMBER
 
-    with open("../models/classifier.pkl") as f:
-        model = pickle.load(f)
-    # Start Flask app
-    app.run(host='0.0.0.0', port=PORT, debug=True)
+    	#Wait forever for incoming http requests
+    	server.serve_forever()
+
+    except KeyboardInterrupt:
+    	print '^C received, shutting down the web server'
+    	server.socket.close()
