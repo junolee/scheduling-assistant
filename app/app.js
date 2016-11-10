@@ -18,7 +18,6 @@ app.get("/chatbot", function(req, res){
 });
 
 app.get("/getMessage", function(req, res){
-    console.log(req.query.message);
     axios.get('http://localhost:8080?message=' + req.query.message)
       .then(function (response) {
         res.send(response.data);
@@ -29,5 +28,5 @@ app.get("/getMessage", function(req, res){
 })
 
 app.listen(3000, function(){
-    console.log("SERVER IS RUNNING!");
+    console.log("Node.js HTTP server started on port 3000!");
 })
