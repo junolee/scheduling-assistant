@@ -35,6 +35,7 @@ function insertMessage() {
         setDate();
         $('.message-input').val(null);
         updateScrollbar();
+        console.log('result from the javascript file: ' + result)
         reply(result);
     }).catch(function(err){
         console.log('get request to server failed: ' + err);
@@ -61,7 +62,7 @@ function welcomeMessage() {
 
   setTimeout(function() {
     $('.message.loading').remove();
-    $('<div class="message new">' + 'Hello there' + '</div>').appendTo($('.mCSB_container')).addClass('new');
+    $('<div class="message new">' + "Hey Juno, what's up?" + '</div>').appendTo($('.mCSB_container')).addClass('new');
     setDate();
     updateScrollbar();
     i++;
