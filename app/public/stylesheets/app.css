@@ -21,7 +21,7 @@ body {
     height: 100%;
     background-image:url('../images/mt-fuji.jpg');
     background-repeat:no-repeat;
-    background-position:center;
+    /*background-position:center;*/
 }
 
 .main-view-content {
@@ -40,7 +40,7 @@ body {
     position:fixed;
     height:100%;
     z-index: 1;
-    background:rgba(255, 255, 255, 0.3);
+    background:rgba(255, 255, 255, 0.2);
 }
 
 .rtl {
