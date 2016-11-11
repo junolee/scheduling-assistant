@@ -19,6 +19,10 @@ class myHandler(BaseHTTPRequestHandler):
         query_components = dict(qc.split("=") for qc in query.split("&"))
         msg = ' '.join(query_components["message"].split('%20'))
         reply = clf.predict([msg])[0]
+        if reply == 'create_event':
+            reply = 'Sure, I\'ll add that to the calendar!'
+        else:
+            reply = 'Let me check that for you.'
         self.wfile.write(reply)
     def log_message(self, format, *args):
         return

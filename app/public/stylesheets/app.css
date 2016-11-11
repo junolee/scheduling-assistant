@@ -15,7 +15,7 @@ body {
     height: 100%;
 }
 
-.main-view{
+.main-view {
     padding-right:380px;
     z-index: 0;
     height: 100%;
@@ -26,6 +26,13 @@ body {
 
 .main-view-content {
       min-width: 400px;
+}
+
+#calendar {
+    width: 100%;
+    height: 100%;
+    /*padding: 10px;*/
+    border: 0;
 }
 
 .chat-view{
