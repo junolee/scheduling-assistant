@@ -35,7 +35,6 @@ function insertMessage() {
         setDate();
         $('.message-input').val(null);
         updateScrollbar();
-        console.log('result from the javascript file: ' + result)
         reply(result);
     }).catch(function(err){
         console.log('get request to server failed: ' + err);
