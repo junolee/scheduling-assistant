@@ -10,7 +10,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics import confusion_matrix, precision_score, recall_score
 
 def load_data():
-    data = pd.read_csv('data/requests.csv').values
+    data = pd.read_csv('../../data/requests.csv').values
     np.random.shuffle(data)
     X = data[:,0]
     y = data[:,1]
@@ -18,12 +18,10 @@ def load_data():
 
 def tokenize(text): # get the tokens using spaCy
     tokens = parser(text)
-
     new = []
     for tok in tokens:
         new.append(tok.lemma_.lower().strip())
     tokens = new
-
     return tokens
 
 def score(model, X_test, y_test):
@@ -37,7 +35,7 @@ if __name__ == "__main__":
     X, y = load_data()
     X_train, X_test, y_train, y_test = train_test_split(X, y)
 
-    rf = LinearSVC() #RandomForestClassifier(n_estimators=100)
+    rf = RandomForestClassifier(n_estimators=100)
 
     model = Pipeline([('vectorizer', vectorizer), ('rf', rf)])
 
