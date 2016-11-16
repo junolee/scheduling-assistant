@@ -1,4 +1,5 @@
 var $messages = $('.messages-content'),
+    create_event,
     d, h, m,
     i = 0;
 
@@ -41,10 +42,6 @@ function insertMessage() {
     })
 }
 
-$('.message-submit').click(function() {
-  insertMessage();
-});
-
 $(window).on('keydown', function(e) {
   if (e.which == 13) {
     insertMessage();
@@ -68,7 +65,7 @@ function welcomeMessage() {
 }, 1000);
 }
 
-function reply(msg = 'Sorry, my service is currently unavailable.') {
+function reply(result = "{intent:'Unknown',reply:'Sorry, my service is currently unavailable.'}") {
   if ($('.message-input').val() != '') {
     return false;
   }
@@ -77,11 +74,15 @@ function reply(msg = 'Sorry, my service is currently unavailable.') {
 
   setTimeout(function() {
     $('.message.loading').remove();
-
-    $('<div class="message new">' + msg + '</div>').appendTo($('.mCSB_container')).addClass('new');
-
+    result = result.replace(/u'/g, '"');
+    result = result.replace(/'/g, '"');
+    result = $.parseJSON(result);
+    $('<div class="message new">' + result.reply + '</div>').appendTo($('.mCSB_container')).addClass('new');
     setDate();
     updateScrollbar();
+    if (result.intent == 'create_event') {
+        $('#calendar').attr('src', $('#calendar').attr('src'));
+    }
     i++;
   }, 500 + (Math.random() * 20) * 100);
 }
@@ -93,3 +94,28 @@ function setDate(){
     $('<div class="timestamp">' + d.getHours() + ':' + m + '</div>').appendTo($('.message:last'));
   }
 }
+
+$('.speech').click(function() {
+    if (window.hasOwnProperty('webkitSpeechRecognition')) {
+
+      var recognition = new webkitSpeechRecognition();
+
+      recognition.continuous = false;
+      recognition.interimResults = false;
+
+      recognition.lang = "en-US";
+      recognition.start();
+
+      recognition.onresult = function(e) {
+        $('.message-input')[0].value = e.results[0][0].transcript;
+        console.log(e.results[0][0].transcript);
+        recognition.stop();
+        insertMessage();
+      };
+
+      recognition.onerror = function(e) {
+        recognition.stop();
+      }
+
+    }
+});

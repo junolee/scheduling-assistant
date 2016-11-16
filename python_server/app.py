@@ -84,7 +84,7 @@ class myHandler(BaseHTTPRequestHandler):
                     date = dt.date()
                     time = 'All-Day'
                 reply += '<br>' + str(dt.month) + '/' + str(dt.day) + ' ' + time + ' ' + event['summary']
-        self.wfile.write(reply)
+        self.wfile.write({"intent": intent, "reply": reply})
     def log_message(self, format, *args):
         return
 

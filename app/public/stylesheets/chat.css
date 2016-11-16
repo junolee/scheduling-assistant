@@ -110,6 +110,15 @@
 .message-box .message-submit:hover {
   background: rgba(30, 200, 130, 0.5);
 }
+.speech {
+    float: right;
+    width: 10px;
+    opacity: 0.3;
+}
+
+.speech:hover {
+    opacity: 0.6;
+}
 
 /*--------------------
     CHAT BODY

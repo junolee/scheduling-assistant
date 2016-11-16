@@ -18,14 +18,14 @@ app.get("/chatbot", function(req, res){
 app.get("/getMessage", function(req, res){
     axios.get('http://localhost:8080?message=' + req.query.message)
       .then(function (response) {
-        reply = response.data;
-        return res.send(reply);
+        response = response.data;
+        return res.send(response);
       })
       .catch(function (error) {
         console.log("get request to python server didn't work: " + error);
       });
 })
 
-app.listen(3000, function(){
+app.listen(process.env.PORT || 3000, function(){
     console.log("Node.js HTTP server started on port 3000!");
 })
