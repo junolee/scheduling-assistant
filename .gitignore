@@ -1,4 +1,5 @@
- *.DS_Store
-*.pyc
+*.DS_Store
 .ipynb_checkpoints
+*.pyc
+client_secret.json
 app_planning.md

@@ -1,14 +1,14 @@
 # coding: utf-8
 from BaseHTTPServer import BaseHTTPRequestHandler,HTTPServer
-from urlparse import urlparse
-import numpy as np
-import pandas as pd
-import cPickle as pickle
-from spacy.en import English
 from sklearn.feature_extraction.text import CountVectorizer
 from datetime import datetime, timedelta
-import dateutil
 from recurrent import RecurringEvent
+from urlparse import urlparse
+from spacy.en import English
+import cPickle as pickle
+import pandas as pd
+import numpy as np
+import dateutil
 import random
 # Google Calendar API
 import httplib2
