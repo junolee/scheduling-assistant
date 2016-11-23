@@ -29,7 +29,7 @@ CLIENT_SECRET_FILE = 'client_secret.json'
 APPLICATION_NAME = 'Google Calendar API Python Quickstart'
 
 create_replies = ['Ok, just added that to your calendar!',
-                  'Ok, I\'ll schedule that for you!']
+                  'Ok, scheduled that for you!']
 
 #This class will handles any incoming request from the browser
 class myHandler(BaseHTTPRequestHandler):
@@ -47,6 +47,10 @@ class myHandler(BaseHTTPRequestHandler):
         if intent == 'create_event':
             r = RecurringEvent(now_date=datetime.now())
             dt = r.parse(msg)
+            if "p.m." in msg and dt.hour < 12:
+                dt += timedelta(hours=12)
+            if "a.m." in msg and dt.hour > 12:
+                dt -= timedelta(hours=12)
             reply = random.choice(create_replies)
             event = {
               'summary': 'Meeting',

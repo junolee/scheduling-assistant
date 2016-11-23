@@ -11,6 +11,35 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
+.popup {
+    position: absolute;
+    background-color: rgba(0, 0, 0, .9);
+    color: rgba(255, 255, 255, .7);
+    text-align: center;
+
+    font-size: 14px;
+    top: 0;
+	left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 10%;
+    z-index: 2;
+}
+
+.popup #title {
+    font-size: 24px;
+    font-weight: bolder;
+}
+
+.popup .eg {
+    font-style: italic;
+    opacity: .5;
+}
+
+.popup .start {
+    text-transform: uppercase;
+}
+
 .row {
     height: 100%;
 }
@@ -21,7 +50,6 @@ body {
     height: 100%;
     background-image:url('../images/mt-fuji.jpg');
     background-repeat:no-repeat;
-    /*background-position:center;*/
 }
 
 .main-view-content {
@@ -31,7 +59,6 @@ body {
 #calendar {
     width: 100%;
     height: 100%;
-    /*padding: 10px;*/
     border: 0;
 }
 

@@ -1,14 +1,19 @@
 var $messages = $('.messages-content'),
     create_event,
     d, h, m,
+    clicks = 0,
     i = 0;
 
-$(window).on('load', function() {
-  $messages.mCustomScrollbar();
-  setTimeout(function() {
-    welcomeMessage();
-  }, 100);
-});
+$("body").click(function(){
+    if (clicks === 0) {
+        $(".popup").fadeToggle();
+        clicks = 1;
+        $messages.mCustomScrollbar();
+        setTimeout(function() {
+          welcomeMessage();
+        }, 100);
+    }
+})
 
 function updateScrollbar() {
   $messages.mCustomScrollbar("update").mCustomScrollbar('scrollTo', 'bottom', {
@@ -58,7 +63,7 @@ function welcomeMessage() {
 
   setTimeout(function() {
     $('.message.loading').remove();
-    $('<div class="message new">' + "Hey Juno, what's up?" + '</div>').appendTo($('.mCSB_container')).addClass('new');
+    $('<div class="message new">' + "Hey, how can I help you?" + '</div>').appendTo($('.mCSB_container')).addClass('new');
     setDate();
     updateScrollbar();
     i++;
@@ -76,8 +81,15 @@ function reply(result = "{intent:'Unknown',reply:'Sorry, my service is currently
     $('.message.loading').remove();
     result = result.replace(/u'/g, '"');
     result = result.replace(/'/g, '"');
-    result = $.parseJSON(result);
-    $('<div class="message new">' + result.reply + '</div>').appendTo($('.mCSB_container')).addClass('new');
+    try{
+        result = $.parseJSON(result);
+        response = result.reply;
+    }
+    catch(err){
+        console.log(err);
+        response = "Sorry, can you repeat that?";
+    }
+    $('<div class="message new">' + response + '</div>').appendTo($('.mCSB_container')).addClass('new');
     setDate();
     updateScrollbar();
     if (result.intent == 'create_event') {
